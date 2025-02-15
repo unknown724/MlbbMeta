@@ -11,10 +11,13 @@
             background-size: cover;
             color: #fff;
             text-align: center;
+            margin: 0;
+            padding: 0;
         }
         .title-container {
-            margin-top: 40px;
+            margin-top: 20px;
             margin-bottom: 20px;
+            padding: 0 10px;
         }
         h1 {
             font-size: 3em;
@@ -23,7 +26,7 @@
             margin-bottom: 10px;
         }
         .subtitle {
-            font-size: 1.5em;
+            font-size: 1.2em;
             color: #ffdd44;
             text-shadow: 3px 3px 10px rgba(255, 221, 68, 1);
             margin-bottom: 20px;
@@ -38,10 +41,10 @@
             overflow: hidden;
         }
         th, td {
-            padding: 14px;
+            padding: 10px;
             border: 1px solid rgba(255, 94, 0, 1);
             text-align: center;
-            font-size: 1.1em;
+            font-size: 1em;
         }
         th {
             background: linear-gradient(45deg, #ff4500, #ff7b00);
@@ -61,7 +64,7 @@
             transition: 0.3s;
         }
         td:nth-child(2) {
-            font-size: 1.5em;
+            font-size: 1.2em;
             font-weight: bold;
             color: #ffdd44;
             text-shadow: 3px 3px 15px rgba(255, 221, 68, 1);
@@ -75,9 +78,21 @@
             position: fixed;
             bottom: 10px;
             right: 10px;
-            font-size: 0.6em;
+            font-size: 0.5em;
             font-weight: bold;
             color: rgba(255, 255, 255, 0.6);
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .subtitle {
+                font-size: 1em;
+            }
+            th, td {
+                font-size: 0.8em;
+                padding: 8px;
+            }
         }
     </style>
 </head>
@@ -125,17 +140,6 @@
                     Object.values(row).forEach((value, index) => {
                         const td = document.createElement("td");
                         td.textContent = value;
-                        if (index === 1) {
-                            td.style.fontSize = '1.5em';
-                            td.style.fontWeight = 'bold';
-                            td.style.color = '#ffdd44';
-                            td.style.textShadow = '3px 3px 15px rgba(255, 221, 68, 1)';
-                        }
-                        if ([0, 5, 6, 8, 10].includes(index)) {
-                            td.style.fontWeight = 'bold';
-                            td.style.color = '#ffcc00';
-                            td.style.textShadow = '2px 2px 8px rgba(255, 204, 0, 1)';
-                        }
                         tr.appendChild(td);
                     });
                     tbody.appendChild(tr);
