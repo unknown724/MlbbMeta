@@ -18,6 +18,11 @@
             margin-top: 20px;
             margin-bottom: 20px;
             padding: 0 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
         h1 {
             font-size: 3em;
@@ -83,11 +88,20 @@
             color: rgba(255, 255, 255, 0.6);
         }
         @media (max-width: 768px) {
+            .title-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+            }
             h1 {
                 font-size: 2em;
+                text-align: center;
             }
             .subtitle {
                 font-size: 1em;
+                text-align: center;
             }
             th, td {
                 font-size: 0.8em;
