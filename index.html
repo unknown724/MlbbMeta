@@ -13,40 +13,57 @@
             text-align: center;
         }
         h1 {
-            font-size: 2.5em;
-            text-shadow: 2px 2px 8px rgba(255, 94, 0, 0.8);
+            font-size: 3em;
+            text-shadow: 4px 4px 12px rgba(255, 94, 0, 1);
+            font-weight: bold;
         }
         table {
             width: 90%;
             margin: 20px auto;
             border-collapse: collapse;
-            background: rgba(0, 0, 0, 0.8);
-            box-shadow: 0 4px 15px rgba(255, 94, 0, 0.7);
-            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.9);
+            box-shadow: 0 6px 20px rgba(255, 94, 0, 1);
+            border-radius: 12px;
             overflow: hidden;
         }
         th, td {
-            padding: 12px;
-            border: 1px solid rgba(255, 94, 0, 0.7);
+            padding: 14px;
+            border: 1px solid rgba(255, 94, 0, 1);
             text-align: center;
+            font-size: 1.1em;
         }
         th {
             background: linear-gradient(45deg, #ff4500, #ff7b00);
             color: white;
             text-transform: uppercase;
             font-weight: bold;
+            letter-spacing: 1px;
         }
         tr:nth-child(even) {
-            background: rgba(255, 94, 0, 0.2);
+            background: rgba(255, 94, 0, 0.3);
+        }
+        tr:nth-child(odd) {
+            background: rgba(255, 94, 0, 0.1);
         }
         tr:hover {
-            background: rgba(255, 94, 0, 0.5);
+            background: rgba(255, 94, 0, 0.7);
             transition: 0.3s;
+        }
+        td:nth-child(2) { /* Highlighting Hero Name */
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #ffdd44;
+            text-shadow: 3px 3px 10px rgba(255, 221, 68, 0.9);
+        }
+        td:nth-child(1), td:nth-child(6), td:nth-child(7), td:nth-child(9), td:nth-child(11) {
+            font-weight: bold;
+            color: #ffcc00;
+            text-shadow: 2px 2px 6px rgba(255, 204, 0, 0.8);
         }
     </style>
 </head>
 <body>
-    <h1>MLBB Hero Statistics</h1>
+    <h1>🔥 MLBB Hero Statistics 🔥</h1>
     <table>
         <thead>
             <tr>
@@ -69,20 +86,42 @@
     </table>
     <script>
         fetch('data.json')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
                 const tbody = document.querySelector("tbody");
+                if (!Array.isArray(data)) {
+                    throw new Error('Invalid data format');
+                }
                 data.forEach(row => {
                     const tr = document.createElement("tr");
-                    Object.values(row).forEach(value => {
+                    Object.values(row).forEach((value, index) => {
                         const td = document.createElement("td");
                         td.textContent = value;
+                        if (index === 1) { // Highlight Hero Name
+                            td.style.fontSize = '1.3em';
+                            td.style.fontWeight = 'bold';
+                            td.style.color = '#ffdd44';
+                            td.style.textShadow = '3px 3px 10px rgba(255, 221, 68, 0.9)';
+                        }
+                        if ([0, 5, 6, 8, 10].includes(index)) { // Highlighting important stats
+                            td.style.fontWeight = 'bold';
+                            td.style.color = '#ffcc00';
+                            td.style.textShadow = '2px 2px 6px rgba(255, 204, 0, 0.8)';
+                        }
                         tr.appendChild(td);
                     });
                     tbody.appendChild(tr);
                 });
             })
-            .catch(error => console.error('Error loading data:', error));
+            .catch(error => {
+                console.error('Error loading data:', error);
+                document.body.innerHTML += `<p style="color: red; font-size: 1.5em;">Failed to load data. Please check the file path and format.</p>`;
+            });
     </script>
 </body>
 </html>
