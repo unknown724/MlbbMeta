@@ -12,14 +12,25 @@
             color: #fff;
             text-align: center;
         }
+        .title-container {
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
         h1 {
             font-size: 3em;
             text-shadow: 4px 4px 12px rgba(255, 94, 0, 1);
             font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            font-size: 1.5em;
+            color: #ffdd44;
+            text-shadow: 3px 3px 10px rgba(255, 221, 68, 1);
+            margin-bottom: 20px;
         }
         table {
             width: 90%;
-            margin: 20px auto;
+            margin: auto;
             border-collapse: collapse;
             background: rgba(0, 0, 0, 0.9);
             box-shadow: 0 6px 20px rgba(255, 94, 0, 1);
@@ -49,21 +60,32 @@
             background: rgba(255, 94, 0, 0.7);
             transition: 0.3s;
         }
-        td:nth-child(2) { /* Highlighting Hero Name */
-            font-size: 1.3em;
+        td:nth-child(2) {
+            font-size: 1.5em;
             font-weight: bold;
             color: #ffdd44;
-            text-shadow: 3px 3px 10px rgba(255, 221, 68, 0.9);
+            text-shadow: 3px 3px 15px rgba(255, 221, 68, 1);
         }
         td:nth-child(1), td:nth-child(6), td:nth-child(7), td:nth-child(9), td:nth-child(11) {
             font-weight: bold;
             color: #ffcc00;
-            text-shadow: 2px 2px 6px rgba(255, 204, 0, 0.8);
+            text-shadow: 2px 2px 8px rgba(255, 204, 0, 1);
+        }
+        .footer {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 0.6em;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.6);
         }
     </style>
 </head>
 <body>
-    <h1>🔥 MLBB Hero Statistics 🔥</h1>
+    <div class="title-container">
+        <h1>🔥 MLBB Hero Statistics 🔥</h1>
+        <div class="subtitle">ESL/Snapdragon Pro Series/Season 6/Statistics</div>
+    </div>
     <table>
         <thead>
             <tr>
@@ -84,6 +106,7 @@
             <!-- Data rows will be inserted here dynamically -->
         </tbody>
     </table>
+    <div class="footer">Develop by Oneshot</div>
     <script>
         fetch('data.json')
             .then(response => {
@@ -102,16 +125,16 @@
                     Object.values(row).forEach((value, index) => {
                         const td = document.createElement("td");
                         td.textContent = value;
-                        if (index === 1) { // Highlight Hero Name
-                            td.style.fontSize = '1.3em';
+                        if (index === 1) {
+                            td.style.fontSize = '1.5em';
                             td.style.fontWeight = 'bold';
                             td.style.color = '#ffdd44';
-                            td.style.textShadow = '3px 3px 10px rgba(255, 221, 68, 0.9)';
+                            td.style.textShadow = '3px 3px 15px rgba(255, 221, 68, 1)';
                         }
-                        if ([0, 5, 6, 8, 10].includes(index)) { // Highlighting important stats
+                        if ([0, 5, 6, 8, 10].includes(index)) {
                             td.style.fontWeight = 'bold';
                             td.style.color = '#ffcc00';
-                            td.style.textShadow = '2px 2px 6px rgba(255, 204, 0, 0.8)';
+                            td.style.textShadow = '2px 2px 8px rgba(255, 204, 0, 1)';
                         }
                         tr.appendChild(td);
                     });
